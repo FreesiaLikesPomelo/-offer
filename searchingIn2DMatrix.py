@@ -37,7 +37,7 @@ try:
 except:
 	print("Break")
 	
-# 以下为牛客网测试用例
+# 以下为牛客网测试用例  通过率35.29% 20200131
 '''
 while True:
     try:
