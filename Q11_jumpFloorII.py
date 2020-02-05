@@ -25,3 +25,19 @@ class Solution:
             for i in range(2,number):
                 fn.append(self.listSum(fn))
         return fn[number]
+    
+'''
+# when we print fn:
+# [1, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512,...]
+# so we can get fn[number] = 2^(number-1)
+# but nowCode can not pass the code below
+
+import math 
+class Solution：
+    def jumpFloorII(self,number):
+        if number==0:
+            return 1
+        else:
+            answer = int(math.pow(2,number-1))
+            return answer
+'''
