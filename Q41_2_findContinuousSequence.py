@@ -11,8 +11,6 @@
 限制：
 1 <= target <= 10^5
 
-执行用时 :284 ms, 在所有 Python3 提交中击败了40.24%的用户
-内存消耗 :13.6 MB, 在所有 Python3 提交中击败了100.00%的用户
 '''
 
 # test cases:
@@ -20,6 +18,38 @@
 # 2. no qualified result: input 4, 8...
 # 3. normal test: might contain more than one qualified list 
 
+# 执行用时 :204 ms, 在所有 Python3 提交中击败了52.83%的用户
+# 内存消耗 :13.7 MB, 在所有 Python3 提交中击败了100.00%的用户
+
+class Solution:
+    def findContinuousSequence(self, target: int) -> List[List[int]]:
+        if target<3:
+            return []
+        elif target==3:
+            return [[1,2]]
+        else:
+            small = 1
+            big = 2
+            result = []
+            Sn = small+big
+            limit = int((target+1)/2)
+            while small<limit and big>small: # 6:3, 9:5
+                if Sn==target:
+                    temp = list(range(small,big+1))
+                    result.append(temp)
+                    Sn-=small
+                    small+=1
+                elif Sn<target:
+                    big+=1
+                    Sn+=big
+                else: #Sn>target
+                    Sn-=small
+                    small+=1
+            return result
+
+'''
+# 执行用时 :284 ms, 在所有 Python3 提交中击败了40.24%的用户
+# 内存消耗 :13.6 MB, 在所有 Python3 提交中击败了100.00%的用户
 class Solution:
     def findContinuousSequence(self, target: int) -> List[List[int]]:
         if target<3:
@@ -41,3 +71,4 @@ class Solution:
                 else: #Sn>target
                     small+=1
             return result
+'''
