@@ -16,15 +16,44 @@
 如果面试官要求空间O(1)并且不能修改原数组，还得写成二分法！！！
 '''
 
-# 执行用时 :64 ms, 在所有 Python3 提交中击败了48.24%的用户
-# 内存消耗 :23.1 MB, 在所有 Python3 提交中击败了100.00%的用户
-
 # test :
 # input: [] -> None
 # 1. [1, 2, 3, 4] -> None
 # 2. [1, 2, 4, 0, 1] -> 1
 # 3. [1, 2, 3, 4, ..., 90, 91, 92, 92]->92
 
+# 执行用时 :64 ms, 在所有 Python3 提交中击败了48.24%的用户
+# 内存消耗 :23 MB, 在所有 Python3 提交中击败了100.00%的用户
+class Solution:
+    def findRepeatNumber(self, nums: List[int]) -> int:
+        if nums==[]:
+            return 
+        ans = set()
+        for num in nums:
+            if num in ans:
+                return num
+            else:
+                ans.add(num)
+        return
+
+'''
+# 执行用时 :48 ms, 在所有 Python3 提交中击败了90.09%的用户
+# 内存消耗 :23.2 MB, 在所有 Python3 提交中击败了100.00%的用户
+class Solution:
+    def findRepeatNumber(self, nums: List[int]) -> int:
+        if nums==[]:
+            return 
+        dic = {}
+        for i in range(len(nums)):
+            if nums[i] not in dic:
+                dic[nums[i]] = 1
+            else:
+                return nums[i]
+'''
+
+'''
+# 执行用时 :64 ms, 在所有 Python3 提交中击败了48.24%的用户
+# 内存消耗 :23.1 MB, 在所有 Python3 提交中击败了100.00%的用户
 class Solution:
     def findRepeatNumber(self, nums: List[int]) -> int:
         if nums==[]:
@@ -34,3 +63,4 @@ class Solution:
             if nums[i]==nums[i+1]:
                 return nums[i]
         return 
+'''
