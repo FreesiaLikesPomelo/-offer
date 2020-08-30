@@ -17,6 +17,65 @@
 #         self.val = val
 #         self.next = next
 
+# 执行用时：116 ms, 在所有 Python3 提交中击败了51.98%的用户
+# 内存消耗：23.1 MB, 在所有 Python3 提交中击败了63.38%的用户
+class Solution:
+    def reverseList(self, head: ListNode)-> ListNode:
+        #print("Now I am here. Head:",head.val)
+        pre = None
+        cur = head
+        while cur!=None:
+            #print("cur:",cur.val)
+            temp = cur.next
+            cur.next = pre
+            pre = cur
+            cur = temp
+        # print(pre)
+        return pre
+
+    def insertList(self,head1: ListNode, head2:ListNode)->ListNode:
+        # insert the List2 into List1
+        # l11->l21->l12->l22->l13->L23...
+        #print(head1, head2)
+        cur1 = head1.next
+        cur2 = head2.next
+        head1.next = head2
+        tail = head2
+        while cur1!=None and cur2!=None:
+            temp1 = cur1.next
+            temp2 = cur2.next
+            tail.next = cur1
+            tail.next.next = cur2
+            tail = cur2
+            cur1 = temp1
+            cur2 = temp2 
+        if cur1!=None:
+            tail.next = cur1            
+        return head1
+
+    def reorderList(self, head: ListNode) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        if head==None or head.next==None or head.next.next==None:
+            return head
+        
+        fast = head
+        slow = head
+        while fast.next!=None and fast.next.next!=None:
+            slow = slow.next
+            fast = fast.next.next
+        middleNode = slow.next
+        slow.next = None
+        # slow is the middle node
+        # print("middle node",slow.val)
+        # reverse the latter half list
+        reList = self.reverseList(middleNode)
+        # insert the reList into the former list
+        return self.insertList(head,reList)
+
+
+'''
 #执行用时：112 ms, 在所有 Python3 提交中击败了66.84%的用户
 #内存消耗：23.1 MB, 在所有 Python3 提交中击败了72.38%的用户
 # find the middle node first
@@ -53,5 +112,4 @@ class Solution:
         if cur!=temp:
             cur.next = None
         return head
-
-
+'''
