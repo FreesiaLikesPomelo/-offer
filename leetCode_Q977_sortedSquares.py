@@ -18,12 +18,14 @@
 1 <= nums.length <= 104
 -104 <= nums[i] <= 104
 nums 已按 非递减顺序 排序
- 
-执行用时：52 ms, 在所有 Python3 提交中击败了99.73%的用户
-内存消耗：16.5 MB, 在所有 Python3 提交中击败了5.01%的用户
 """
+
 def square(num):
     return num*num
+
+"""
+执行用时：52 ms, 在所有 Python3 提交中击败了99.73%的用户
+内存消耗：16.5 MB, 在所有 Python3 提交中击败了5.01%的用户
 
 class Solution:
     def sortedSquares(self, nums: List[int]) -> List[int]:
@@ -39,3 +41,54 @@ class Solution:
             result = list(map(square,absNums))
             # print(result)
             return result
+"""
+
+
+
+"""
+执行用时：68 ms, 在所有 Python3 提交中击败了98.08%的用户
+内存消耗：16.3 MB, 在所有 Python3 提交中击败了5.01%的用户
+"""
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        if nums==[]:
+            return
+        elif len(nums)==1:
+            return [nums[0]*nums[0]]
+        else:
+            neg = -1
+            for i in range(len(nums)):
+                if nums[i]<0:
+                    neg = i
+            
+            if neg==-1:
+                return list(map(square,nums))
+            elif neg==len(nums)-1:
+                ans = list(map(square,nums))
+                ans.sort()
+                return ans
+            else:
+                num1 = list(map(square,nums[0:neg+1]))
+                num2 = list(map(square,nums[neg+1:]))
+                idxl,idxr = len(num1)-1,0
+                ans = []
+                while idxl>=0 and idxr<len(num2):
+                    if num2[idxr]<num1[idxl]:
+                        ans.append(num2[idxr])   
+                        idxr+=1
+                    else:
+                        ans.append(num1[idxl])
+                        idxl-=1
+                if idxl<0:
+                    while idxr<len(num2):
+                        ans.append(num2[idxr])
+                        idxr+=1
+                else:
+                    while idxl>=0:
+                        ans.append(num1[idxl])
+                        idxl-=1
+                return ans
+                               
+                
+
+            
